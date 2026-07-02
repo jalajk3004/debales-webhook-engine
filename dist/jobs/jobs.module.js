@@ -8,10 +8,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JobsModule = void 0;
 const common_1 = require("@nestjs/common");
+const mongoose_1 = require("@nestjs/mongoose");
+const bullmq_1 = require("@nestjs/bullmq");
+const job_record_schema_1 = require("./schemas/job-record.schema");
 let JobsModule = class JobsModule {
 };
 exports.JobsModule = JobsModule;
 exports.JobsModule = JobsModule = __decorate([
-    (0, common_1.Module)({})
+    (0, common_1.Module)({
+        imports: [
+            mongoose_1.MongooseModule.forFeature([
+                { name: job_record_schema_1.JobRecord.name, schema: job_record_schema_1.JobRecordSchema },
+            ]),
+            bullmq_1.BullModule.registerQueue({
+                name: 'rule-evaluation',
+            }),
+        ],
+        exports: [mongoose_1.MongooseModule, bullmq_1.BullModule],
+    })
 ], JobsModule);
 //# sourceMappingURL=jobs.module.js.map
