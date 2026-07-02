@@ -8,10 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ActionsModule = void 0;
 const common_1 = require("@nestjs/common");
+const mongoose_1 = require("@nestjs/mongoose");
+const actions_service_1 = require("./actions.service");
+const crm_record_schema_1 = require("./schemas/crm-record.schema");
 let ActionsModule = class ActionsModule {
 };
 exports.ActionsModule = ActionsModule;
 exports.ActionsModule = ActionsModule = __decorate([
-    (0, common_1.Module)({})
+    (0, common_1.Module)({
+        imports: [
+            mongoose_1.MongooseModule.forFeature([
+                { name: crm_record_schema_1.CrmRecord.name, schema: crm_record_schema_1.CrmRecordSchema },
+            ]),
+        ],
+        providers: [actions_service_1.ActionsService],
+        exports: [actions_service_1.ActionsService],
+    })
 ], ActionsModule);
 //# sourceMappingURL=actions.module.js.map

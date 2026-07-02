@@ -10,6 +10,7 @@ exports.RulesModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const rule_schema_1 = require("./schemas/rule.schema");
+const rules_service_1 = require("./rules.service");
 let RulesModule = class RulesModule {
 };
 exports.RulesModule = RulesModule;
@@ -20,7 +21,8 @@ exports.RulesModule = RulesModule = __decorate([
                 { name: rule_schema_1.Rule.name, schema: rule_schema_1.RuleSchema },
             ]),
         ],
-        exports: [mongoose_1.MongooseModule],
+        providers: [rules_service_1.RulesService],
+        exports: [mongoose_1.MongooseModule, rules_service_1.RulesService],
     })
 ], RulesModule);
 //# sourceMappingURL=rules.module.js.map
